@@ -6,7 +6,7 @@ InterProcess makes it fast and easy to access these shared variables without wor
 
 Under the hood, InterProcess is essentially a fancy wrapper for Window's CreateFileMapping() and MapViewOfFile(). It uses Windows Mutex objects to ensure that only one process can read or write to a field and any given time. 
 
-InterProcess was written by Andrew Leifer, leifer@fas.harvard.edu.
+InterProcess was written by Andrew Leifer, leifer@princeton.edu.
 
 It is released under the GNU General Public License without any warranty. 
 
