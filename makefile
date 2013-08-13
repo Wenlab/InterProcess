@@ -1,6 +1,9 @@
 
-CXX=g++
+CXX=x86_64-w64-mingw32-g++.exe
 CXXFLAGS= -c -v -Wall -mwindows
+
+#This WIN API linker objects must go at the END of the linker command
+LinkerWinAPILibObj= -lcomctl32 -lgdi32 -lole32 -lavifil32 -lavicap32 -lwinmm -lmsvfw32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -lsetupapi -lmingw32 -lsetupapi -static-libgcc -static-libstdc++
 
 targetdir=bin
 srcdir=src
@@ -12,7 +15,7 @@ interprocess: $(targetdir)/interprocess.o
 
 
 $(targetdir)/client.exe: $(targetdir)/interprocess.o client.o
-	$(CXX) client.o $(targetdir)/interprocess.o -o $(targetdir)/client.exe
+	$(CXX) client.o $(targetdir)/interprocess.o -o $(targetdir)/client.exe $(LinkerWinAPILibObj)
 	
 
 client.o:$(smpldir)/client.c $(srcdir)/interprocess.h
@@ -21,7 +24,7 @@ client.o:$(smpldir)/client.c $(srcdir)/interprocess.h
 
 
 $(targetdir)/host.exe: $(targetdir)/interprocess.o host.o
-	$(CXX) host.o $(targetdir)/interprocess.o -o $(targetdir)/host.exe
+	$(CXX) host.o $(targetdir)/interprocess.o -o $(targetdir)/host.exe $(LinkerWinAPILibObj)
 	
 
 host.o:$(smpldir)/host.c $(srcdir)/interprocess.h
